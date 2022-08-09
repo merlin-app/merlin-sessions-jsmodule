@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Library Prototype</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Analytics Library Prototype</h1>
+
+  <h5>Time on page: <span class="js-timer">0</span> seconds</h5>
+
+  <button class="js-button">Click (js)</button>
+  <button class="analytics-click">Click (class)</button>
+
+  <br>
+  <br>
+
+  <a class="js-link" href="#">Hover (js)</a>
+  <a class="analytics-hover" href="#">Hover (class)</a>
+
+  <br>
+  <br>
+
+  <button class="js-metamask-login">Login with MetaMask</button>
+
+  <div class="spacer"></div>
+  
+  <h2 class="analytics-in-viewport">In viewport</h2>
+  
+  <div class="spacer"></div>
+
+  <!-- "date-goal" attribute takes milliseconds as value -->
+  <h2 class="analytics-in-viewport" data-goal="5000">In viewport with goal (5 sec)</h2>
+
+  <script src="js/analytics.js"></script>
+  <script>
+    // Initializing analytics library
+    analytics.init({
+      tenantID: 5,
+      userID:   1
+    });
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+
+      // MetaMask login example
+      document.querySelector('.js-metamask-login').addEventListener('click', async e => {
+        const { ethereum } = window;
+        // Checking if we have MetaMask extension installed
+        if (ethereum) {
+          try {
+            // Trying to log in
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            const wallet = accounts[0];
+            analytics.send({
+              event_name: 'MetaMask login',
+              event_type: 'metamask_login',
+              event_properties: {
+                wallet
+              }
+            });
+          }
+          catch (error) {
+            analytics.send({
+              event_name: 'MetaMask login rejected',
+              event_type: 'metamask_rejected',
+              event_properties: {
+                message: error?.message
+              }
+            });
+          }
+        }
+        else {
+          console.error('Please install MetaMask extension');
+        }
+      });
+
+      // Binding custom click event
+      document.querySelector('.js-button').addEventListener('click', function(e) {
+        // We can pass the tenant id and/or user id manually but it's not necessary
+        analytics.send({
+          event_name: 'JavaScript button click',
+          event_type: 'click'
+        });
+      });
+  
+      // Binding custom hover event
+      document.querySelector('.js-link').addEventListener('mouseover', function(e) {
+        // We can pass the tenant id and/or user id manually but it's not necessary
+        analytics.send({
+          event_name: 'JavaScript link hover',
+          event_type: 'hover'
+        });
+      });
+    });
+    
+  </script>
+</body>
+</html>

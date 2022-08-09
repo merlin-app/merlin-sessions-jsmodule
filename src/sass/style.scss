@@ -1,0 +1,90 @@
+@import "./fonts";
+@import "./mixins";
+
+html {
+  --outline-width: .4rem;
+
+  font-size: .520834vw;
+  
+  @include sm {
+    font-size: 1.26595vw;
+  }
+}
+
+body {
+  position: relative;
+
+  font-family: "Hack", monospace;
+  font-size: 4rem;
+  line-height: 1.25em;
+  letter-spacing: .01em;
+
+  margin: 1.25em;
+
+  @media print {
+    font-size: 2.8rem;
+    line-height: 1.125;
+  }
+}
+
+button {
+  border: none;
+  border-radius: var(--outline-width);
+  box-shadow: 0 0 0 var(--outline-width) rgba(black, .5);
+  padding: .2em .5em;
+
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+kbd,
+code,
+i.marked {
+  background-color: #eee;
+  display: inline-block;
+  border-radius: .25em;
+  padding: 0.2em 0.5em 0.2em;
+  
+  font-family: inherit;
+  font-size: .85em;
+  color: #333;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+
+  white-space: nowrap;
+
+  &:focus-within {
+    outline: var(--outline-width) solid rgb(0 123 193 / 25%);
+    outline-offset: .15em;
+  }
+  
+  a {
+    box-shadow: none;
+  }
+}
+
+a {
+  box-shadow: 0 var(--outline-width) 0 0 rgb(0 123 193 / 25%);
+  color: #007bc1;
+  text-decoration: none;
+
+  &:hover {
+    box-shadow: 0 var(--outline-width) 0 0 rgb(0 123 193 / 75%);
+  }
+
+  &:focus {
+    outline: 0;
+    border-radius: var(--outline-width);
+    box-shadow: 0 0 0 var(--outline-width) rgb(0 123 193 / 25%);
+  }
+
+  @media print {
+    box-shadow: none;
+  }
+}
+
+.spacer {
+  height: 130vh;
+}
