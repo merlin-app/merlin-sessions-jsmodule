@@ -44,7 +44,7 @@ const analytics = {
         });
       });
   
-      Array.from( document.querySelectorAll('.analytics-in-viewport') ).forEach(element => {
+      Array.from( document.querySelectorAll('.analytics-enter-viewport') ).forEach(element => {
         let firstTrigger = true;
         let startTime;
         let timer;
