@@ -55,7 +55,7 @@
     document.addEventListener("DOMContentLoaded", function (event) {
 
       document.querySelector('.js-see-stats').addEventListener('click', function(e) {
-        this.href += `?api_key=DiZZapAbJ6iydj21VHAJ&tenant_name=prod_3`;
+        this.href += `?api_key=${merlin.api_key}&tenant_name=${merlin.tenant_name}`;
       });
 
       // MetaMask login example
