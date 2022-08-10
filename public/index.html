@@ -13,13 +13,19 @@
   <h5>Time on page: <span class="js-timer">0</span> seconds</h5>
 
   <button class="js-button">Click (js)</button>
-  <button class="analytics-click">Click (class)</button>
+  <button
+    class="merlin-click"
+    data-merlin-event-name="HTML attribute"
+    data-merlin-user-properties="{ 'custom1': 555, 'custom2': 'string', 'custom3': false }"
+  >
+    Click (class)
+  </button>
 
   <br>
   <br>
 
   <a class="js-link" href="#">Hover (js)</a>
-  <a class="analytics-hover" href="#">Hover (class)</a>
+  <a class="merlin-hover" href="#">Hover (class)</a>
 
   <br>
   <br>
@@ -28,19 +34,21 @@
 
   <div class="spacer"></div>
   
-  <h2 class="analytics-enter-viewport">In viewport</h2>
+  <h2 class="merlin-enter-viewport">In viewport</h2>
   
   <div class="spacer"></div>
 
   <!-- "date-goal" attribute takes milliseconds as value -->
-  <h2 class="analytics-enter-viewport" data-goal="5000">In viewport with goal (5 sec)</h2>
+  <h2 class="merlin-enter-viewport" data-goal="5000">In viewport with goal (5 sec)</h2>
 
-  <script src="js/analytics.js"></script>
+  <script src="js/merlin.js"></script>
   <script>
     // Initializing analytics library
-    analytics.init({
-      tenantID: 5,
-      userID:   1
+    merlin.init({
+      tenant_id:   0,
+      tenant_name: 'prod_3',
+      api_key:     'DiZZapAbJ6iydj21VHAJ',
+      user_id:     0
     });
 
     document.addEventListener("DOMContentLoaded", function (event) {
@@ -54,7 +62,7 @@
             // Trying to log in
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             const wallet = accounts[0];
-            analytics.send({
+            merlin.send({
               event_name: 'MetaMask login',
               event_type: 'metamask_login',
               event_properties: {
@@ -63,7 +71,7 @@
             });
           }
           catch (error) {
-            analytics.send({
+            merlin.send({
               event_name: 'MetaMask login rejected',
               event_type: 'metamask_rejected',
               event_properties: {
@@ -80,25 +88,27 @@
       // Binding custom click event
       document.querySelector('.js-button').addEventListener('click', function(e) {
         // We can pass the tenant id and/or user id manually but it's not necessary
-        analytics.send({
+        merlin.send({
           event_name: 'JavaScript button click',
-          event_type: 'click'
+          event_type: 'click',
+          user_properties: {
+            myCustomValue1: 'string',
+            myCustomValue2: 555,
+            myCustomValue3: true
+          }
         });
       });
   
       // Binding custom hover event
       document.querySelector('.js-link').addEventListener('mouseover', function(e) {
         // We can pass the tenant id and/or user id manually but it's not necessary
-        analytics.send({
+        merlin.send({
           event_name: 'JavaScript link hover',
           event_type: 'hover'
         });
       });
     });
     
-  </script>
-  <script>
-    fetch('https://events.getmerlin.site/get_events/')
   </script>
 </body>
 </html>

@@ -1,10 +1,14 @@
-const analytics = {
-  tenantID: 0,
-  userID:   0,
+const merlin = {
+  tenant_id:   0,
+  tenant_name: '',
+  api_key:     '',
+  user_id:     0,
 
   init(config) {
-    this.tenantID = config?.tenantID ?? 0;
-    this.userID   = config?.userID   ?? 0;
+    this.tenant_id   = config?.tenant_id   ?? 0;
+    this.tenant_name = config?.tenant_name ?? '';
+    this.api_key     = config?.api_key     ?? '';
+    this.user_id     = config?.user_id     ?? 0;
 
     console.log('Analytics init');
 
@@ -20,19 +24,16 @@ const analytics = {
         timer.textContent = ((Date.now() - startTime) / 1000).toFixed(0);
       }, 1000);
   
-      Array.from( document.querySelectorAll('.analytics-click') ).forEach(element => {
+      Array.from( document.querySelectorAll('.merlin-click') ).forEach(element => {
         element.addEventListener('click', e => {
           this.send({
-            event_name: 'Button click',
             event_type: 'click',
-            user_properties: {
-              myCustomValue: '.analytics-click'
-            }
+            ...this.collectParams(element)
           });
         });
       });
   
-      Array.from( document.querySelectorAll('.analytics-hover') ).forEach(element => {
+      Array.from( document.querySelectorAll('.merlin-hover') ).forEach(element => {
         element.addEventListener('mouseover', e => {
           this.send({
             event_name: 'Link hover',
@@ -44,7 +45,7 @@ const analytics = {
         });
       });
   
-      Array.from( document.querySelectorAll('.analytics-enter-viewport') ).forEach(element => {
+      Array.from( document.querySelectorAll('.merlin-enter-viewport') ).forEach(element => {
         let firstTrigger = true;
         let startTime;
         let timer;
@@ -101,6 +102,36 @@ const analytics = {
 
   },
 
+  collectParams(element) {
+    const params = {};
+    
+    if (element.hasAttribute('data-merlin-event-name')) {
+      params.event_name = element.getAttribute('data-merlin-event-name');
+    }
+
+    if (element.hasAttribute('data-merlin-event-type')) {
+      params.event_type = element.getAttribute('data-merlin-event-type');
+    }
+
+    if (element.hasAttribute('data-merlin-auth-project')) {
+      params.auth_project = JSON.parse( element.getAttribute('data-merlin-auth-project').replace(/'/g, '"') );
+    }
+
+    if (element.hasAttribute('data-merlin-other-admin-variables')) {
+      params.other_admin_variables = JSON.parse( element.getAttribute('data-merlin-other-admin-variables').replace(/'/g, '"') );
+    }
+
+    if (element.hasAttribute('data-merlin-event-properties')) {
+      params.event_properties = JSON.parse( element.getAttribute('data-merlin-event-properties').replace(/'/g, '"') );
+    }
+
+    if (element.hasAttribute('data-merlin-user-properties')) {
+      params.user_properties = JSON.parse( element.getAttribute('data-merlin-user-properties').replace(/'/g, '"') );
+    }
+
+    return params;
+  },
+
   send(options) {
     const {
       event_name,
@@ -112,16 +143,17 @@ const analytics = {
       user_properties
     } = options;
 
-    console.log({
+    const json = {
       event_name,
       event_type,
       auth_project: {
-        tenant_id: this.tenantID,
-        api_key:   '',
+        tenant_id:   this.tenant_id,
+        tenant_name: this.tenant_name,
+        api_key:     this.api_key,
         ...auth_project
       },
       user_ids: {
-        user_id:        this.userID,
+        user_id:        this.user_id,
         wallet_address: '',
         ...user_ids
       },
@@ -134,8 +166,17 @@ const analytics = {
       event_properties: event_properties ?? {},
       user_properties:  user_properties  ?? {},
       automatically_tracked: this.user
-    });
+    };
+
+    console.log(json);
+
     // Here we'll make a request to the server
+    fetch('https://events.getmerlin.site/add_event', {
+      method: 'POST',
+      body: JSON.stringify(json)
+    })
+      .then(response => response.json())
+      .then(console.log);
   },
 
   get browser() {
@@ -249,29 +290,14 @@ const analytics = {
 
   get user() {
     return {
-      BrowserType: this.browser,
-      OSName:      this.os,
-      DeviceType:  this.device,
-      Timestamp:   Date.now(),
-      URL:         location.href,
-      Referrer:    null,
-      Country:     null,
-      Language:    this.language
+      browser_type: this.browser,
+      os_name:      this.os,
+      device_type:  this.device,
+      timestamp:    Date.now(),
+      url:          location.href,
+      referrer:     null,
+      country:      null,
+      language:     this.language
     };
-  },
-
-  isMobile() {
-    let isMobile = window.matchMedia || window.msMatchMedia;
-    if (isMobile) {
-      let matchMobile = isMobile('(pointer:coarse)');
-      return matchMobile.matches;
-    }
-    return false;
-  },
-  onClick() {
-    alert('onClick');
-  },
-  onHover() {
-    alert('onHover');
   }
 };
