@@ -9,6 +9,7 @@
 </head>
 <body>
   <h1>Analytics Library Prototype</h1>
+  <a href="https://events.getmerlin.site/get_events" target="_blank" class="js-see-stats">See stats</a>
 
   <h5>Time on page: <span class="js-timer">0</span> seconds</h5>
 
@@ -52,6 +53,10 @@
     });
 
     document.addEventListener("DOMContentLoaded", function (event) {
+
+      document.querySelector('.js-see-stats').addEventListener('click', function(e) {
+        this.href += `?api_key=DiZZapAbJ6iydj21VHAJ&tenant_name=prod_3`;
+      });
 
       // MetaMask login example
       document.querySelector('.js-metamask-login').addEventListener('click', async e => {
