@@ -5,6 +5,8 @@ const merlin = {
   user_id:     0,
 
   init(config) {
+    window.apiHost = 'events.getmerlin.site';
+
     this.tenant_id   = config?.tenant_id   ?? 0;
     this.tenant_name = config?.tenant_name ?? '';
     this.api_key     = config?.api_key     ?? '';
@@ -171,7 +173,7 @@ const merlin = {
     console.log(json);
 
     // Here we'll make a request to the server
-    fetch('https://events.getmerlin.site/add_event', {
+    fetch(`https://${window.apiHost}/add_event`, {
       method: 'POST',
       body: JSON.stringify(json)
     })

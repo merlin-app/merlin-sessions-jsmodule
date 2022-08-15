@@ -9,7 +9,27 @@
 </head>
 <body>
   <h1>Analytics Library Prototype</h1>
-  <a href="https://events.getmerlin.site/get_events" target="_blank" class="js-see-stats">See stats</a>
+
+  Host:
+  <label>
+    <input type="radio" name="host" value="dev">
+    Dev
+  </label>
+  <label>
+    <input type="radio" name="host" value="prod" checked>
+    Prod
+  </label>
+
+  <br>
+  <br>
+
+  Tenant name:
+  <input class="js-tenant-name"  type="text" value="merlin" placeholder="Tenant name">
+
+  <br>
+  <br>
+
+  <a class="js-see-stats" href="https://events.getmerlin.site/get_events" target="_blank">See stats</a>
 
   <h5>Time on page: <span class="js-timer">0</span> seconds</h5>
 
@@ -53,6 +73,26 @@
     });
 
     document.addEventListener("DOMContentLoaded", function (event) {
+
+      document.querySelector('.js-tenant-name').addEventListener('input', function(e) {
+        const tenant_name = e.target.value;
+        merlin.tenant_name = tenant_name;
+      });
+
+      document.querySelectorAll("input[name='host']").forEach(radio => {
+        radio.addEventListener('change', e => {
+          const dev = e.target.value === 'dev';
+          window.apiHost = dev ? 'dev.events.getmerlin.site' : 'events.getmerlin.site';
+          merlin.api_key = dev ? 'QW93DLs6z39geUZmdpp6' : 'DiZZapAbJ6iydj21VHAJ';
+
+          document.querySelector('.js-see-stats').setAttribute(
+            'href',
+            dev
+              ? 'https://dev.events.getmerlin.site/get_events'
+              : 'https://events.getmerlin.site/get_events'
+          );
+        });
+      });
 
       document.querySelector('.js-see-stats').addEventListener('click', function(e) {
         this.href += `?api_key=${merlin.api_key}&tenant_name=${merlin.tenant_name}`;

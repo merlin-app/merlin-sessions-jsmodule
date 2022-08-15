@@ -25,7 +25,7 @@ html {
 body {
   position: relative;
   font-family: "Hack", monospace;
-  font-size: 4rem;
+  font-size: 3rem;
   line-height: 1.25em;
   letter-spacing: 0.01em;
   margin: 1.25em;
@@ -45,7 +45,12 @@ button {
   box-shadow: 0 0 0 var(--outline-width) rgba(0, 0, 0, 0.5);
   padding: 0.2em 0.5em;
   font-family: inherit;
+  font-size: 1em;
   cursor: pointer;
+}
+
+input {
+  font-family: inherit;
 }
 
 kbd,

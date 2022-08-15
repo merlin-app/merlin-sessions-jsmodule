@@ -15,7 +15,7 @@ body {
   position: relative;
 
   font-family: "Hack", monospace;
-  font-size: 4rem;
+  font-size: 3rem;
   line-height: 1.25em;
   letter-spacing: .01em;
 
@@ -34,8 +34,13 @@ button {
   padding: .2em .5em;
 
   font-family: inherit;
+  font-size: 1em;
 
   cursor: pointer;
+}
+
+input {
+  font-family: inherit;
 }
 
 kbd,
