@@ -20,7 +20,7 @@ merlin.init({
   wallet_address : <value>
 });
 ```
-Contact us at hello@getmerlin.xyz to get the `api_key` and `tenant_name`. 
+Contact us at hello@getmerlin.xyz to get the `api_key` and `tenant_name`. They serve as authentication parameters to validate incoming requests into the Merlin servers.
 
 Being web3 native, we wanted to serve our dApps better and thus we are natively giving two options to uniquely identify a user. You can pass wallet address via `wallet_address`, and any internal user identifier you might via `user_id`. Either one of them should be populated to correctly attribute an event to an user. You can provide both as well. 
 
