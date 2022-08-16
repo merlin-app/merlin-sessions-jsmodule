@@ -4,15 +4,17 @@ const merlin = {
   api_key:     '',
   user_id:     -1,
   wallet_address: null,
+  enviornment_type: '',
 
   init(config) {
     window.apiHost = 'events.getmerlin.site';
 
-    this.tenant_id      = config?.tenant_id;
-    this.tenant_name    = config?.tenant_name;
-    this.api_key        = config?.api_key;
-    this.user_id        = config?.user_id;
-    this.wallet_address = config?.wallet_address;
+    this.tenant_id        = config?.tenant_id;
+    this.tenant_name      = config?.tenant_name;
+    this.api_key          = config?.api_key;
+    this.user_id          = config?.user_id;
+    this.wallet_address   = config?.wallet_address;
+    this.enviornment_type = config?.enviornment_type;
 
     window.addEventListener('load', () => {
       this.send({
@@ -167,7 +169,8 @@ const merlin = {
       },
       event_properties: event_properties ?? {},
       user_properties:  user_properties  ?? {},
-      automatically_tracked: this.user
+      automatically_tracked: this.user,
+      enviornment_type: this.enviornment_type
     };
 
     console.log(json);

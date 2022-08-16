@@ -12,16 +12,10 @@ merlin.init({
   tenant_name : <value>,
   api_key : <value>,
   user_id : <value>,
-  wallet_address : <value>
+  wallet_address : <value>,
+  enviornment_type : <value>
 });
 ```
-
-**Parameters**
-- `options` - parameters that can be passed to `merlin.init()`
-    - `options.tenant_name` (`string`) - Used to identify the data with a specific tenant.
-    - `options.api_key` (`string`) - The API key to connect with the db. (contact hello@getmerlin.xyz to get the API key)
-    - `options.user_id` (`number`) - Used to identify the data with a specific user.
-    - `options.wallet_address` (`string`) - Used to identify the data with a specific wallet address.
 
 Being web3 native, we wanted to serve our dApps better and thus we are natively giving two options to uniquely identify a user. You can pass wallet address via `wallet_address`, and any internal user identifier you might via `user_id`. Either one of them should be populated to correctly attribute an event to an user.
 
@@ -105,6 +99,7 @@ Initializes Merlin Project
     - `options.api_key` (`string`) - The API key to connect with the db. (contact hello@getmerlin.xyz to get the API key)
     - `options.user_id` (`number`) - Used to identify the data with a specific user.
     - `options.wallet_address` (`string`) - Used to identify the data with a specific wallet address.
+    - `options.enviornment_type` (`string`)
 
 ### `merlin.send(parameters)`
 Registers and sends an event.
