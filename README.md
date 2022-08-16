@@ -1,7 +1,7 @@
 # Merlin Sessions SDK
 
 ## Introduction
-
+Merlin Sessions SDK provides a way to collect events data from your application. It is designed to be lightweight and can be easily configured within your codebase. Contact us at hello@getmerlin.xyz to get access to this service. 
 
 ## Initializing library
 1. In HTML, use `<script>` tag to link analytics `.js` file:
@@ -17,13 +17,12 @@ merlin.init({
   tenant_name : <value>,
   api_key : <value>,
   user_id : <value>,
-  wallet_address : <value>,
-  enviornment_type : <value>
+  wallet_address : <value>
 });
 ```
 Contact us at hello@getmerlin.xyz to get the `api_key` and `tenant_name`. 
 
-Being web3 native, we wanted to serve our dApps better and thus we are natively giving two options to uniquely identify a user. You can pass wallet address via `wallet_address`, and any internal user identifier you might via `user_id`. Either one of them should be populated to correctly attribute an event to an user.
+Being web3 native, we wanted to serve our dApps better and thus we are natively giving two options to uniquely identify a user. You can pass wallet address via `wallet_address`, and any internal user identifier you might via `user_id`. Either one of them should be populated to correctly attribute an event to an user. You can provide both as well. 
 
 If you need to change `.init()` parameters, **do not** call `merlin.init()` the second time! You can just modify them directly like this:
 ```js
@@ -105,7 +104,6 @@ Initializes Merlin Project
     - `options.api_key` (`string`) - The API key to connect with the db. (contact us at hello@getmerlin.xyz to get the API key)
     - `options.user_id` (`number`) - Used to identify the data with a specific user.
     - `options.wallet_address` (`string`) - Used to identify the data with a specific wallet address.
-    - `options.enviornment_type` (`string`) - Used to denote whether this development or production environment.
 
 ### `merlin.send(parameters)`
 Registers and sends an event.
