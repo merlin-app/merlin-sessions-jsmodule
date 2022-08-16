@@ -1,3 +1,8 @@
+# Merlin Sessions SDK
+
+## Introduction
+
+
 ## Initializing library
 1. In HTML, use `<script>` tag to link analytics `.js` file:
 ```html
@@ -16,6 +21,7 @@ merlin.init({
   enviornment_type : <value>
 });
 ```
+Contact us at hello@getmerlin.xyz to get the `api_key` and `tenant_name`. 
 
 Being web3 native, we wanted to serve our dApps better and thus we are natively giving two options to uniquely identify a user. You can pass wallet address via `wallet_address`, and any internal user identifier you might via `user_id`. Either one of them should be populated to correctly attribute an event to an user.
 
@@ -95,11 +101,11 @@ Please note:
 ### `merlin.init(options)`
 Initializes Merlin Project
 - `options` - parameters that can be passed to `merlin.init()`
-    - `options.tenant_name` (`string`) - Used to identify the data with a specific tenant.
-    - `options.api_key` (`string`) - The API key to connect with the db. (contact hello@getmerlin.xyz to get the API key)
+    - `options.tenant_name` (`string`) - Used to identify the data with a specific tenant. (contact us at hello@getmerlin.xyz to get the API key)
+    - `options.api_key` (`string`) - The API key to connect with the db. (contact us at hello@getmerlin.xyz to get the API key)
     - `options.user_id` (`number`) - Used to identify the data with a specific user.
     - `options.wallet_address` (`string`) - Used to identify the data with a specific wallet address.
-    - `options.enviornment_type` (`string`)
+    - `options.enviornment_type` (`string`) - Used to denote whether this development or production environment.
 
 ### `merlin.send(parameters)`
 Registers and sends an event.
