@@ -22,6 +22,7 @@ merlin.init({
 ```
 Contact us at hello@getmerlin.xyz to get the `api_key` and `tenant_name`. They serve as authentication parameters to validate incoming requests into the Merlin servers.
 
+**Note on user_id vs wallet_address**
 Being web3 native, we wanted to serve our dApps better and thus we are natively giving two options to uniquely identify a user. You can pass wallet address via `wallet_address`, and any internal user identifier you might via `user_id`. Either one of them should be populated to correctly attribute an event to an user. You can provide both as well. 
 
 If you need to change `.init()` parameters, **do not** call `merlin.init()` the second time! You can just modify them directly like this:
