@@ -14,8 +14,8 @@ Merlin Sessions SDK provides a way to collect events data from your application.
 ```js
 // Initializing Merlin Project with authorization details
 merlin.init({
-  tenant_name : <value>,
-  api_key : <value>,
+  tenant_name : <value> (required),
+  api_key : <value> (required),
   user_id : <value>,
   wallet_address : <value>
 });
