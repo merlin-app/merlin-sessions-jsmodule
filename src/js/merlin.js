@@ -1,18 +1,18 @@
 const merlin = {
-  tenant_id:   0,
+  tenant_id:   -1,
   tenant_name: '',
   api_key:     '',
-  user_id:     0,
+  user_id:     -1,
+  wallet_address: null,
 
   init(config) {
     window.apiHost = 'events.getmerlin.site';
 
-    this.tenant_id   = config?.tenant_id   ?? 0;
-    this.tenant_name = config?.tenant_name ?? '';
-    this.api_key     = config?.api_key     ?? '';
-    this.user_id     = config?.user_id     ?? 0;
-
-    console.log('Analytics init');
+    this.tenant_id      = config?.tenant_id;
+    this.tenant_name    = config?.tenant_name;
+    this.api_key        = config?.api_key;
+    this.user_id        = config?.user_id;
+    this.wallet_address = config?.wallet_address;
 
     window.addEventListener('load', () => {
       this.send({
@@ -102,6 +102,7 @@ const merlin = {
 
     });
 
+    console.log('Merlin analytics initialized');
   },
 
   collectParams(element) {
@@ -156,12 +157,11 @@ const merlin = {
       },
       user_ids: {
         user_id:        this.user_id,
-        wallet_address: '',
+        wallet_address: this.wallet_address,
         ...user_ids
       },
       other_admin_variables: {
         insert_id:   0,
-        timestamp:   Date.now(),
         app_version: '',
         ...other_admin_variables
       },

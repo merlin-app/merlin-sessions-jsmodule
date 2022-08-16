@@ -127,9 +127,7 @@ merlin.send({
     user_id: 17,
     wallet_address: 'xxx'
   },
-  other_admin_variables: {
-    timestamp:   Date.now()
-  },
+  other_admin_variables: {},
   event_properties: {},
   user_properties:  {
     myCustomValue: 'anything
