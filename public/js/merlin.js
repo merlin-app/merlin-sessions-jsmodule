@@ -1,4 +1,5 @@
 const merlin = {
+  dev:         true,
   tenant_id:   -1,
   tenant_name: '',
   api_key:     '',
@@ -7,7 +8,7 @@ const merlin = {
   enviornment_type: '',
 
   init(config) {
-    window.apiHost = 'events.getmerlin.site';
+    window.merlinHost = this.dev ? 'dev.events.getmerlin.site' : 'events.getmerlin.site';
 
     this.tenant_id        = config?.tenant_id;
     this.tenant_name      = config?.tenant_name;
@@ -137,7 +138,7 @@ const merlin = {
     return params;
   },
 
-  send(options) {
+  async send(options) {
     const {
       event_name,
       event_type,
@@ -153,7 +154,7 @@ const merlin = {
       event_type,
       auth_project: {
         tenant_id:   this.tenant_id,
-        tenant_name: this.tenant_name,
+        tenant_name: this.tenant_name?.toLowerCase(),
         api_key:     this.api_key,
         ...auth_project
       },
@@ -173,15 +174,19 @@ const merlin = {
       enviornment_type: this.enviornment_type
     };
 
-    console.log(json);
-
     // Here we'll make a request to the server
-    fetch(`https://${window.apiHost}/add_event`, {
-      method: 'POST',
-      body: JSON.stringify(json)
-    })
-      .then(response => response.json())
-      .then(console.log);
+    try {
+      const response = await fetch(`https://${window.merlinHost ?? 'dev.events.getmerlin.site'}/add_event`, {
+        method: 'POST',
+        body: JSON.stringify(json)
+      });
+      const data = await response.json();
+      console.log(data);
+      return data;
+    }
+    catch (e) {
+      console.error(e);
+    }
   },
 
   get browser() {

@@ -12,11 +12,11 @@
 
   Host:
   <label>
-    <input type="radio" name="host" value="dev">
+    <input type="radio" name="host" value="dev" checked>
     Dev
   </label>
   <label>
-    <input type="radio" name="host" value="prod" checked>
+    <input type="radio" name="host" value="prod">
     Prod
   </label>
 
@@ -29,7 +29,7 @@
   <br>
   <br>
 
-  <a class="js-see-stats" href="https://events.getmerlin.site/get_events" target="_blank">See stats</a>
+  <a class="js-see-stats" href="https://dev.events.getmerlin.site/get_events" target="_blank">See stats</a>
 
   <h5>Time on page: <span class="js-timer">0</span> seconds</h5>
 
@@ -68,7 +68,7 @@
     merlin.init({
       tenant_id:   0,
       tenant_name: 'merlin',
-      api_key:     'DiZZapAbJ6iydj21VHAJ',
+      api_key:     'QW93DLs6z39geUZmdpp6',
       user_id:     0
     });
 
@@ -82,8 +82,8 @@
       document.querySelectorAll("input[name='host']").forEach(radio => {
         radio.addEventListener('change', e => {
           const dev = e.target.value === 'dev';
-          window.apiHost = dev ? 'dev.events.getmerlin.site' : 'events.getmerlin.site';
-          merlin.api_key = dev ? 'QW93DLs6z39geUZmdpp6' : 'DiZZapAbJ6iydj21VHAJ';
+          window.merlinHost = dev ? 'dev.events.getmerlin.site' : 'events.getmerlin.site';
+          merlin.api_key    = dev ? 'QW93DLs6z39geUZmdpp6'      : 'DiZZapAbJ6iydj21VHAJ';
 
           document.querySelector('.js-see-stats').setAttribute(
             'href',

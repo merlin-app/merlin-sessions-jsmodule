@@ -14,10 +14,11 @@ Merlin Sessions SDK provides a way to collect events data from your application.
 ```js
 // Initializing Merlin Project with authorization details
 merlin.init({
-  tenant_name : <value> (required),
-  api_key : <value> (required),
-  user_id : <value>,
-  wallet_address : <value>
+  tenant_name : <string> (required),
+  api_key : <string> (required),
+  user_id : <number>,
+  wallet_address : <string>,
+  dev : <boolean>
 });
 ```
 Contact us at hello@getmerlin.xyz to get the `api_key` and `tenant_name`. They serve as authentication parameters to validate incoming requests into the Merlin servers.
