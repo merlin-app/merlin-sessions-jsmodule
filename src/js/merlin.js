@@ -160,7 +160,7 @@ const merlin = {
       },
       user_ids: {
         user_id:        this.user_id,
-        wallet_address: this.wallet_address?.toLowerCase(),
+        wallet_address: String(this.wallet_address).toLowerCase(),
         ...user_ids
       },
       other_admin_variables: {
