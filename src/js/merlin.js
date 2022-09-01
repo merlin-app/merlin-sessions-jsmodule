@@ -8,7 +8,7 @@ const merlin = {
   enviornment_type: '',
 
   init(config) {
-    window.merlinHost = this.dev ? 'dev.events.getmerlin.site' : 'events.getmerlin.site';
+    window.merlinHost = config?.dev ? 'dev.events.getmerlin.site' : 'events.getmerlin.site';
 
     this.tenant_id        = config?.tenant_id;
     this.tenant_name      = config?.tenant_name;
