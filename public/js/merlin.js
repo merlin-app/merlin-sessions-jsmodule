@@ -22,12 +22,6 @@ const merlin = {
         event_name: 'Page visit',
         event_type: 'page_visit'
       });
-
-      let startTime = Date.now();
-      const timer = document.querySelector('.js-timer');
-      setInterval(() => {
-        timer.textContent = ((Date.now() - startTime) / 1000).toFixed(0);
-      }, 1000);
   
       Array.from( document.querySelectorAll('.merlin-click') ).forEach(element => {
         element.addEventListener('click', e => {

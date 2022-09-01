@@ -74,6 +74,12 @@
 
     document.addEventListener("DOMContentLoaded", function (event) {
 
+      let startTime = Date.now();
+      const timer = document.querySelector('.js-timer');
+      setInterval(() => {
+        timer.textContent = ((Date.now() - startTime) / 1000).toFixed(0);
+      }, 1000);
+
       document.querySelector('.js-tenant-name').addEventListener('input', function(e) {
         const tenant_name = e.target.value;
         merlin.tenant_name = tenant_name;
