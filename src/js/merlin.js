@@ -1,11 +1,11 @@
 const merlin = {
-  dev:         true,
-  tenant_id:   -1,
-  tenant_name: '',
-  api_key:     '',
-  user_id:     -1,
+  dev:            false,
+  tenant_id:      -1,
+  tenant_name:    '',
+  api_key:        '',
+  user_id:        -1,
   wallet_address: null,
-  enviornment_type: '',
+  environment_type: '',
 
   init(config) {
     window.merlinHost = config?.dev ? 'dev.events.getmerlin.site' : 'events.getmerlin.site';
@@ -15,7 +15,7 @@ const merlin = {
     this.api_key          = config?.api_key;
     this.user_id          = config?.user_id;
     this.wallet_address   = config?.wallet_address;
-    this.enviornment_type = config?.enviornment_type;
+    this.environment_type = config?.environment_type;
 
     window.addEventListener('load', () => {
       this.send({
@@ -165,7 +165,7 @@ const merlin = {
       event_properties: event_properties ?? {},
       user_properties:  user_properties  ?? {},
       automatically_tracked: this.user,
-      enviornment_type: this.enviornment_type
+      environment_type: this.environment_type
     };
 
     // Here we'll make a request to the server
