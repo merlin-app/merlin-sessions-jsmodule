@@ -20,7 +20,8 @@ const merlin = {
     window.addEventListener('load', () => {
       this.send({
         event_name: 'Page visit',
-        event_type: 'page_visit'
+        event_type: 'page_visit',
+        environment_type: 'my_environment_type'
       });
   
       Array.from( document.querySelectorAll('.merlin-click') ).forEach(element => {
@@ -140,7 +141,8 @@ const merlin = {
       user_ids,
       other_admin_variables,
       event_properties,
-      user_properties
+      user_properties,
+      environment_type
     } = options;
 
     const json = {
@@ -165,7 +167,7 @@ const merlin = {
       event_properties: event_properties ?? {},
       user_properties:  user_properties  ?? {},
       automatically_tracked: this.user,
-      environment_type: this.environment_type
+      environment_type: environment_type ?? this.environment_type
     };
 
     // Here we'll make a request to the server
