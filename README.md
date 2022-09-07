@@ -17,8 +17,7 @@ merlin.init({
   tenant_name : <string> (required),
   api_key : <string> (required),
   user_id : <number>,
-  wallet_address : <string>,
-  dev : <boolean>
+  wallet_address : <string>
 });
 ```
 Contact us at hello@getmerlin.xyz to get the `api_key` and `tenant_name`. They serve as authentication parameters to validate incoming requests into the Merlin servers.
