@@ -18,7 +18,7 @@ merlin.init({
   api_key : <string> (required),
   user_id : <number>,
   wallet_address : <string>,
-  environment_type : <any>
+  environment_type : <string>
 });
 ```
 Contact us at hello@getmerlin.xyz to get the `api_key` and `tenant_name`. They serve as authentication parameters to validate incoming requests into the Merlin servers.
@@ -105,6 +105,7 @@ Initializes Merlin Project
     - `options.api_key` (`string`) - The API key to connect with the db. (contact us at hello@getmerlin.xyz to get the API key)
     - `options.user_id` (`number`) - Used to identify the data with a specific user.
     - `options.wallet_address` (`string`) - Used to identify the data with a specific wallet address.
+    - `options.environment_type` `string`) - (Optional) You can use this to add whether the event is coming from development or production servers at your end
 
 ### `merlin.send(parameters)`
 Registers and sends an event.
