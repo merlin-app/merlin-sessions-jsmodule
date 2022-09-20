@@ -120,7 +120,7 @@ Registers and sends an event.
 | `other_admin_variables` | `object`      | no | To pass the `app_version`. `{'app_version':'development_1.0'}`. If nothing passed, will be kept empty
 | `event_properties`      | `object`      | no | Any custom events details you want to send. If nothing passed, will be kept empty
 | `user_properties`       | `object`      | no | Any custom user details you want to send.  If nothing passed, will be kept empty
-| `environment_type`      | `string`      | no | Environment type
+| `environment_type`      | `string`      | no | Environment type (Development or Production)
 
 
 Here's an example of `.send()` function:
