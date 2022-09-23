@@ -4,7 +4,22 @@
 Merlin Sessions SDK provides a way to collect events data from your application. It is designed to be lightweight and can be easily configured within your codebase. Contact us at hello@getmerlin.xyz to get access to this service. 
 
 ## Initializing library
-1. In HTML, use `<script>` tag to link analytics `.js` file:
+
+1. Add merlin to your project
+
+Install a package via npm:
+```
+npm install merlin-analytics
+```
+
+Then, import it in your javascript/typescript files like this:
+```js
+import merlin from 'merlin-analytics'
+```
+
+Or
+
+Use a `<script>` tag in your `.html` file:
 ```html
 <script src="https://merlin-app.github.io/merlin-sessions-jsmodule/public/js/merlin.js"></script>
 ```
